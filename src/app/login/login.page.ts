@@ -15,15 +15,22 @@ export class LoginPage {
   constructor(private navCtrl: NavController) {}
 
   onLogin() {
-    const savedUser = JSON.parse(localStorage.getItem('user') || '{}');
-    if (this.credentials.username === savedUser.username && this.credentials.password === savedUser.password) {
+    const users = JSON.parse(localStorage.getItem('users') || '[]');
+
+    const user = users.find((user: any) =>
+      user.username === this.credentials.username && user.password === this.credentials.password
+    );
+
+    if (user) {
       this.navCtrl.navigateForward('/home', {
-        queryParams: { username: this.credentials.username }
+        queryParams: { username: user.username }
       });
     } else {
       console.log('Credenciales incorrectas.');
     }
   }
+
+  // Agregar el método para redirigir al registro
   goToRegister() {
     this.navCtrl.navigateForward('/registro');
   }
