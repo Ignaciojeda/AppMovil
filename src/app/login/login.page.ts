@@ -7,18 +7,19 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
-  credentials = {
+
+  Usuario = {
     username: '',
     password: ''
   };
 
   constructor(private navCtrl: NavController) {}
 
-  onLogin() {
+  Ingresar() {
     const users = JSON.parse(localStorage.getItem('users') || '[]');
 
     const user = users.find((user: any) =>
-      user.username === this.credentials.username && user.password === this.credentials.password
+      user.username === this.Usuario.username && user.password === this.Usuario.password
     );
 
     if (user) {
@@ -30,7 +31,6 @@ export class LoginPage {
     }
   }
 
-  // Agregar el método para redirigir al registro
   goToRegister() {
     this.navCtrl.navigateForward('/registro');
   }

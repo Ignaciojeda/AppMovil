@@ -7,35 +7,32 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./registro.page.scss'],
 })
 export class RegistroPage {
-  credentials = {
+  Usuario = {
     username: '',
     password: ''
   };
 
   constructor(private navCtrl: NavController) {}
 
-  onRegister() {
-    if (this.credentials.username && this.credentials.password) {
-      // Obtener los usuarios guardados en localStorage, o inicializar un array vacío
+  Registrar() {
+    if (this.Usuario.username && this.Usuario.password) {
       const users = JSON.parse(localStorage.getItem('users') || '[]');
-      
-      // Verificar si el usuario ya existe
-      const userExists = users.some((user: any) => user.username === this.credentials.username);
-      
+
+      const userExists = users.some((user: any) => user.username === this.Usuario.username);
+
       if (userExists) {
         console.log('El usuario ya está registrado.');
       } else {
-        // Agregar el nuevo usuario al array de usuarios
-        users.push(this.credentials);
-        
-        // Guardar el array actualizado en localStorage
+        users.push(this.Usuario);
         localStorage.setItem('users', JSON.stringify(users));
-        
-        // Redirigir al usuario a la página de login
         this.navCtrl.navigateForward('/login');
       }
     } else {
       console.log('Todos los campos son requeridos');
     }
-  }  
+  }
+
+  goToLogin() {
+    this.navCtrl.navigateForward('/login');
+  }
 }

@@ -22,6 +22,10 @@
     border-radius: 8px;
   }
   
+  ion-icon {
+    animation: bounce 2s infinite;
+  }
+
   @keyframes fadeIn {
     from {
       opacity: 0;

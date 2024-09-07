@@ -15,22 +15,21 @@
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
-            <form (ngSubmit)="onLogin()">
+            <form (ngSubmit)="Ingresar()">
               <ion-item>
                 <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
                 <ion-label position="floating">Usuario</ion-label>
-                <ion-input [(ngModel)]="credentials.username" name="username" type="text" required></ion-input>
+                <ion-input [(ngModel)]="Usuario.username" name="username" type="text" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
                 <ion-label position="floating">Contraseña</ion-label>
-                <ion-input [(ngModel)]="credentials.password" name="password" type="password" required></ion-input>
+                <ion-input [(ngModel)]="Usuario.password" name="password" type="password" required></ion-input>
               </ion-item>
               <ion-button expand="full" color="primary" type="submit" class="login-button">Iniciar Sesión</ion-button>
+              <ion-button expand="full" color="light" (click)="goToRegister()" class="register-button">
+                ¿No tienes cuenta? Regístrate</ion-button>  
             </form>
-            <ion-button expand="full" color="light" (click)="goToRegister()" class="register-button">
-              ¿No tienes cuenta? Regístrate
-            </ion-button>            
           </ion-card-content>
         </ion-card>
       </ion-col>
