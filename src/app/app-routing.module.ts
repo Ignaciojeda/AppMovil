@@ -5,7 +5,15 @@ const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule) },
   { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomePageModule) },
-  { path: 'registro', loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule) },
+  { path: 'registro', loadChildren: () => import('./registro/registro.module').then(m => m.RegistroPageModule) },  {
+    path: 'objetos',
+    loadChildren: () => import('./objetos/objetos.module').then( m => m.ObjetosPageModule)
+  },
+  {
+    path: 'subir',
+    loadChildren: () => import('./subir/subir.module').then( m => m.SubirPageModule)
+  },
+
 ];
 
 

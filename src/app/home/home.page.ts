@@ -21,4 +21,10 @@ export class HomePage {
   logout() {
     this.navCtrl.navigateRoot('/login');
   }
+  gotoobjetos() {
+    this.navCtrl.navigateForward('/objetos');
+  }
+  gotosubir() {
+    this.navCtrl.navigateForward('/subir');
+  }
 }
