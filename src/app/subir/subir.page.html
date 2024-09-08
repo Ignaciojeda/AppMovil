@@ -1,22 +1,67 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="../"></ion-back-button>
-    </ion-buttons>
+<ion-header>
+  <ion-toolbar color="primary">
     <ion-title>Subir</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">subir</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="6" size-lg="4">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">
+              <ion-icon name="cloud-upload-outline" class="subir-icon"></ion-icon>
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form (ngSubmit)="onSubmit()" #uploadForm="ngForm">
+              <ion-item>
+                <ion-icon name="image-outline" slot="start" color="primary"></ion-icon>
+                
+                <input type="file" (change)="onImageChange($event)" />
+              </ion-item>
 
-<ion-content class="ion-text-center"> 
-<p >Buenas si desea subir un objeto aprete el boton </p>
+              <ion-item>
+                <ion-icon name="text-outline" slot="start" color="primary"></ion-icon>
+                <ion-label position="floating">Objeto</ion-label>
+                <ion-input class="identificador" type="text" [(ngModel)]="objectName" name="objectName" required></ion-input>
+              </ion-item>
 
-</ion-content>
+              <ion-item>
+                <ion-icon name="home-outline" slot="start" color="primary"></ion-icon>
+                <ion-label position="floating">Sala</ion-label>
+                <ion-input class="identificador" type="text" [(ngModel)]="room" name="room" required></ion-input>
+              </ion-item>
 
+              <ion-item>
+                <ion-icon name="time-outline" slot="start" color="primary"></ion-icon>
+                <ion-label position="floating">Hora</ion-label>
+                <ion-input class="identificador" type="text" [(ngModel)]="time" name="time" required></ion-input>
+              </ion-item>
+
+              <ion-item>
+                <ion-icon name="document-text-outline" slot="start" color="primary"></ion-icon>
+                <ion-label position="floating">Descripción</ion-label>
+                <ion-input class="identificador" [(ngModel)]="description" name="description" required></ion-input>
+              </ion-item>
+
+              <ion-button expand="full" type="submit" class="subir-button" color="primary">Subir</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+        <ion-card *ngIf="previewData">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Vista Previa</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <img *ngIf="previewImage" [src]="previewImage" alt="Imagen de objeto" style="width: 100%;" />
+            <p><strong>Nombre del Objeto:</strong> {{previewData.objectName}}</p>
+            <p><strong>Sala:</strong> {{previewData.room}}</p>
+            <p><strong>Hora:</strong> {{previewData.time}}</p>
+            <p><strong>Descripción:</strong> {{previewData.description}}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
 </ion-content>

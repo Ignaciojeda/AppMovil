@@ -13,6 +13,10 @@ const routes: Routes = [
     path: 'subir',
     loadChildren: () => import('./subir/subir.module').then( m => m.SubirPageModule)
   },
+  {
+    path: 'tabs',
+    loadChildren: () => import('./tabs/tabs.module').then( m => m.TabsPageModule)
+  },
 
 ];
 

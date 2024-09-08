@@ -23,7 +23,7 @@ export class LoginPage {
     );
 
     if (user) {
-      this.navCtrl.navigateForward('/home', {
+      this.navCtrl.navigateForward('/tabs', {
         queryParams: { username: user.username }
       });
     } else {

@@ -1,17 +1,24 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button defaultHref="../"></ion-back-button>
-    </ion-buttons>
+<ion-content [fullscreen]="true">
+  <ion-header>
+  <ion-toolbar color="primary">
     <ion-title>Objetos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Objetos</ion-title>
-      <ion-buttons slot="start"></ion-buttons>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="12" size-md="6" size-lg="4">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title class="ion-text-center">Audifonos Sony</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img alt="Objeto perdido" src="assets/img/perdido.jpg" />
+          <p><strong>Sala: W304</strong></p>
+          <p><strong>Hora:</strong> 8:30 AM</p>
+          <p><strong>Descripción:</strong> Encontre uno audifonos sony en la sala W304 al llegar seguramente se a alguien de Vespertino</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+  </ion-content>
