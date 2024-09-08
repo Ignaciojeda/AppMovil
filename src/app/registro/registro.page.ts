@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { Router } from '@angular/router';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-registro',
@@ -12,27 +13,38 @@ export class RegistroPage {
     password: ''
   };
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private router: Router, private alertController: AlertController) {}
 
-  Registrar() {
-    if (this.Usuario.username && this.Usuario.password) {
-      const users = JSON.parse(localStorage.getItem('users') || '[]');
-
-      const userExists = users.some((user: any) => user.username === this.Usuario.username);
-
-      if (userExists) {
-        console.log('El usuario ya está registrado.');
-      } else {
-        users.push(this.Usuario);
-        localStorage.setItem('users', JSON.stringify(users));
-        this.navCtrl.navigateForward('/login');
-      }
+  async Registrar() {
+    const users = JSON.parse(localStorage.getItem('user') || '[]');
+  
+    const usuarioExistente = users.find((user: any) => user.username === this.Usuario.username);
+  
+    if (usuarioExistente) {
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Este usuario ya está registrado.',
+        buttons: ['OK']
+      });
+      await alert.present();
     } else {
-      console.log('Todos los campos son requeridos');
+      users.push(this.Usuario);
+      localStorage.setItem('user', JSON.stringify(users)); 
+  
+      const alert = await this.alertController.create({
+        header: 'Registrado',
+        message: 'Usuario registrado con éxito.',
+        buttons: ['OK']
+      });
+      await alert.present();
+  
+      this.router.navigate(['/login']);
     }
   }
+  
+  
 
   goToLogin() {
-    this.navCtrl.navigateForward('/login');
+    this.router.navigate(['/login']);
   }
 }

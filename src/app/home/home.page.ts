@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -13,12 +13,20 @@ export class HomePage {
   constructor(private navCtrl: NavController, private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
-      this.username = params['username'];
-    });
-  }
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
 
+    if (loggedInUser && loggedInUser.username) {
+      this.username = loggedInUser.username;
+    } else {
+      this.route.queryParams.subscribe(params => {
+        if (params['username']) {
+          this.username = params['username'];
+        }
+      });
+    }
+  }
   logout() {
+    localStorage.removeItem('user'); 
     this.navCtrl.navigateRoot('/login');
   }
   gotoobjetos() {

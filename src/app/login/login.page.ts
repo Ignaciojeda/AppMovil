@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
+import { NavController, AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-login',
@@ -13,21 +13,27 @@ export class LoginPage {
     password: ''
   };
 
-  constructor(private navCtrl: NavController) {}
+  constructor(private navCtrl: NavController, private alertController: AlertController) {}
 
-  Ingresar() {
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-
+  async Ingresar() {
+    const users = JSON.parse(localStorage.getItem('user') || '[]');
     const user = users.find((user: any) =>
       user.username === this.Usuario.username && user.password === this.Usuario.password
     );
 
     if (user) {
+      localStorage.setItem('loggedInUser', JSON.stringify(user));
       this.navCtrl.navigateForward('/tabs', {
         queryParams: { username: user.username }
       });
     } else {
-      console.log('Credenciales incorrectas.');
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Usuario o contraseña incorrectos. Por favor, verifica tus datos.',
+        buttons: ['OK']
+      });
+
+      await alert.present();
     }
   }
 
