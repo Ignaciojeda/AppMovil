@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-subir',
@@ -6,6 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['subir.page.scss'],
 })
 export class SubirPage {
+
+  constructor(private navCtrl: NavController) {}
+
+  logout() {
+    localStorage.removeItem('loggedInUser');
+    this.navCtrl.navigateRoot('/login');
+  }
+
   objectName: string = '';
   room: string = '';
   time: string = '';

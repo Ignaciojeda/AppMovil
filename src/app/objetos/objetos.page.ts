@@ -1,15 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-objetos',
   templateUrl: './objetos.page.html',
   styleUrls: ['./objetos.page.scss'],
 })
-export class ObjetosPage implements OnInit {
+export class ObjetosPage {
 
-  constructor() { }
+  constructor(private navCtrl: NavController) {}
 
-  ngOnInit() {
+  logout() {
+    localStorage.removeItem('loggedInUser');
+    this.navCtrl.navigateRoot('/login');
   }
-
 }
