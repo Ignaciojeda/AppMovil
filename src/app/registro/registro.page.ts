@@ -16,7 +16,7 @@ export class RegistroPage {
   constructor(private router: Router, private alertController: AlertController) {}
 
   async Registrar() {
-    const users = JSON.parse(localStorage.getItem('user') || '[]');
+    const users = JSON.parse(sessionStorage.getItem('user') || '[]');
   
     const usuarioExistente = users.find((user: any) => user.username === this.Usuario.username);
   
@@ -29,7 +29,7 @@ export class RegistroPage {
       await alert.present();
     } else {
       users.push(this.Usuario);
-      localStorage.setItem('user', JSON.stringify(users)); 
+      sessionStorage.setItem('user', JSON.stringify(users)); 
   
       const alert = await this.alertController.create({
         header: 'Registrado',
