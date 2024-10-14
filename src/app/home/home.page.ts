@@ -27,8 +27,10 @@ export class HomePage {
   }
   logout() {
     localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('isLoggedIn'); 
     this.navCtrl.navigateRoot('/login');
   }
+  
   gotoobjetos() {
     this.navCtrl.navigateForward('/objetos');
   }

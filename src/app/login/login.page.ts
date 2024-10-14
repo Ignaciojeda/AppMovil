@@ -23,6 +23,7 @@ export class LoginPage {
 
     if (user) {
       localStorage.setItem('loggedInUser', JSON.stringify(user));
+      localStorage.setItem('isLoggedIn', 'true'); // Establecer el indicador de sesión
       this.navCtrl.navigateForward('/tabs', {
         queryParams: { username: user.username }
       });
