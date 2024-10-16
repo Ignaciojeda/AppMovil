@@ -31,4 +31,14 @@ h3{
   top: 50px;
   position: relative;
 }
+#map-container {
+  height: 40vh;  // El mapa ocupará el 40% de la altura de la pantalla
+  width: 100%;
+  margin-top: 20px;  // Espacio adicional entre el contenido y el mapa
+}
+
+#map {
+  height: 100%;
+  width: 100%;
+}
 

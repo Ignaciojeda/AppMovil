@@ -1,14 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
+import * as L from 'leaflet';  // Importamos Leaflet
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.page.html',
   styleUrls: ['./home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
   username: string = '';
+  map: any;  // Variable para el mapa
 
   constructor(private navCtrl: NavController, private route: ActivatedRoute) {}
 
@@ -24,7 +26,24 @@ export class HomePage {
         }
       });
     }
+
+    this.loadMap();  
   }
+  loadMap() {
+
+    this.map = L.map('map').setView([-41.469170, -72.936020], 13);
+
+    // Capa de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(this.map);
+
+    // Agregar un marcador
+    L.marker([-41.469170, -72.936020]).addTo(this.map)
+    .bindPopup('Duoc UC, Sede Puerto Montt')
+    .openPopup();
+  }
+
   logout() {
     localStorage.removeItem('loggedInUser');
     localStorage.removeItem('isLoggedIn'); 
@@ -34,7 +53,13 @@ export class HomePage {
   gotoobjetos() {
     this.navCtrl.navigateForward('/objetos');
   }
+
   gotosubir() {
     this.navCtrl.navigateForward('/subir');
+  }
+  ngAfterViewInit() {
+    setTimeout(() => {
+      this.map.invalidateSize();  
+    }, 500);
   }
 }
