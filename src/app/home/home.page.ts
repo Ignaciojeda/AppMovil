@@ -62,4 +62,30 @@ export class HomePage implements OnInit {
       this.map.invalidateSize();  
     }, 500);
   }
+ionViewWillEnter(){
+  console.log('Se ocupo el ionViewWillEnter ')
+
+}
+
+ionViewDidEnter(){
+ console.log('Se ocupo el ionViewDidEnter')
+}
+
+ionViewWillLeave(){
+console.log('Se ocupo el ionViewWillLeave')
+}
+ionViewDidLeave(){
+console.log('Se ocupo el ionViewDidLeave')
+}
+ngOnDestroy(){
+console.log('Se ocupo el ngOnDestroy')
+}
+
+
+
+
+
+
+
+
 }
