@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   }
   loadMap() {
 
-    this.map = L.map('map').setView([-41.469170, -72.936020], 13);
+    this.map = L.map('map').setView([-41.470428, -72.925755], 13);
 
     // Capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
     }).addTo(this.map);
 
     // Agregar un marcador
-    L.marker([-41.469170, -72.936020]).addTo(this.map)
+    L.marker([-41.470428, -72.925755]).addTo(this.map)
     .bindPopup('Duoc UC, Sede Puerto Montt')
     .openPopup();
   }
@@ -62,4 +62,30 @@ export class HomePage implements OnInit {
       this.map.invalidateSize();  
     }, 500);
   }
+ionViewWillEnter(){
+  console.log('Se ocupo el ionViewWillEnter ')
+
+}
+
+ionViewDidEnter(){
+ console.log('Se ocupo el ionViewDidEnter')
+}
+
+ionViewWillLeave(){
+console.log('Se ocupo el ionViewWillLeave')
+}
+ionViewDidLeave(){
+console.log('Se ocupo el ionViewDidLeave')
+}
+ngOnDestroy(){
+console.log('Se ocupo el ngOnDestroy')
+}
+
+
+
+
+
+
+
+
 }
