@@ -41,4 +41,6 @@ export class LoginPage {
   goToRegister() {
     this.navCtrl.navigateForward('/registro');
   }
+
+  
 }
