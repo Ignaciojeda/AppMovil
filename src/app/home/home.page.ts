@@ -31,7 +31,7 @@ export class HomePage implements OnInit {
   }
   loadMap() {
 
-    this.map = L.map('map').setView([-41.469170, -72.936020], 13);
+    this.map = L.map('map').setView([-41.47010673020358, -72.92584076092523], 13);
 
     // Capa de OpenStreetMap
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -39,7 +39,7 @@ export class HomePage implements OnInit {
     }).addTo(this.map);
 
     // Agregar un marcador
-    L.marker([-41.469170, -72.936020]).addTo(this.map)
+    L.marker([-41.47010673020358, -72.92584076092523]).addTo(this.map)
     .bindPopup('Duoc UC, Sede Puerto Montt')
     .openPopup();
   }
