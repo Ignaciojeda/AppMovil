@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
+import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
 
 @Component({
   selector: 'app-subir',
@@ -20,7 +21,7 @@ export class SubirPage {
   time: string = '';
   description: string = '';
   previewData: any = null;
-  previewImage: string | ArrayBuffer | null = null;
+  previewImage: string | ArrayBuffer | null | undefined = null;  // Cambiado aquí
 
   onSubmit() {
     this.previewData = {
@@ -40,5 +41,27 @@ export class SubirPage {
       };
       reader.readAsDataURL(file);
     }
+  }
+
+  async takePicture() {
+    const previewImage = await Camera.getPhoto({
+      quality: 90,
+      allowEditing: false,
+      resultType: CameraResultType.Uri,
+      source: CameraSource.Camera,
+    });
+
+
+
+    // También actualiza previewImage para que se muestre en la vista previa
+    this.previewImage = previewImage.webPath;
+
+    // Actualiza previewData para incluir la información actual
+    this.previewData = {
+      objectName: this.objectName,
+      room: this.room,
+      time: this.time,
+      description: this.description
+    };
   }
 }
