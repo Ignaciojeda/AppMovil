@@ -13,12 +13,11 @@ export class HomePage implements OnInit {
   map: any;  // Variable para el mapa
 
   constructor(private navCtrl: NavController, private route: ActivatedRoute) {}
-
   ngOnInit() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
-
-    if (loggedInUser && loggedInUser.username) {
-      this.username = loggedInUser.username;
+  
+    if (loggedInUser && loggedInUser.nombre) {
+      this.username = loggedInUser.nombre;  // Usar el nombre del usuario almacenado
     } else {
       this.route.queryParams.subscribe(params => {
         if (params['username']) {
@@ -26,9 +25,10 @@ export class HomePage implements OnInit {
         }
       });
     }
-
+  
     this.loadMap();  
   }
+  
   loadMap() {
 
     this.map = L.map('map').setView([-41.47010673020358, -72.92584076092523], 13);
