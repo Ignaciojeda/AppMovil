@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { AlertController } from '@ionic/angular';
+import { createClient } from '@supabase/supabase-js';
 
 @Component({
   selector: 'app-registro',
@@ -9,40 +10,44 @@ import { AlertController } from '@ionic/angular';
 })
 export class RegistroPage {
   Usuario = {
-    username: '',
-    password: ''
+    nombre: '',
+    email: '',
+    password: '',
+    tipo_usuario: 'estudiante' // Valor predeterminado para tipo_usuario
   };
+
+  private supabase = createClient('https://rphpxwnpbulwhnhaapeu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwaHB4d25wYnVsd2huaGFhcGV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2MzMzODMsImV4cCI6MjA0NTIwOTM4M30.w8vhc96ABfuEytJS3yt_e4k0WtgG-k-2iG4tiBWLbEc');
 
   constructor(private router: Router, private alertController: AlertController) {}
 
   async Registrar() {
-    const users = JSON.parse(sessionStorage.getItem('user') || '[]');
-  
-    const usuarioExistente = users.find((user: any) => user.username === this.Usuario.username);
-  
-    if (usuarioExistente) {
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Este usuario ya está registrado.',
-        buttons: ['OK']
-      });
-      await alert.present();
-    } else {
-      users.push(this.Usuario);
-      sessionStorage.setItem('user', JSON.stringify(users)); 
-  
+    try {
+      // Intenta insertar el nuevo usuario en Supabase
+      const { data, error } = await this.supabase.from('usuarios').insert([this.Usuario]);
+
+      if (error) {
+        throw error;
+      }
+
+      // Muestra un mensaje de éxito y redirige al login
       const alert = await this.alertController.create({
         header: 'Registrado',
         message: 'Usuario registrado con éxito.',
         buttons: ['OK']
       });
       await alert.present();
-  
       this.router.navigate(['/login']);
+      
+    } catch (error) {
+      // Muestra el mensaje de error si el registro falla
+      const alert = await this.alertController.create({
+        header: 'Error',
+        message: 'Este usuario ya está registrado o hubo un problema con el registro.',
+        buttons: ['OK']
+      });
+      await alert.present();
     }
   }
-  
-  
 
   goToLogin() {
     this.router.navigate(['/login']);

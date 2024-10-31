@@ -5,30 +5,37 @@
 </ion-header>
 
 <ion-content>
-  <ion-grid class="register-grid">
+  <ion-grid class="registro-grid">
     <ion-row class="ion-justify-content-center">
       <ion-col size="12" size-md="6" size-lg="4">
         <ion-card>
           <ion-card-header>
             <ion-card-title class="ion-text-center">
-              <ion-icon name="person-add-outline" style="font-size: 5rem; color: #3880ff;"></ion-icon>
+              <ion-icon name="person-circle-outline" style="font-size: 5rem; color: #3880ff;"></ion-icon>
             </ion-card-title>
           </ion-card-header>
           <ion-card-content>
             <form (ngSubmit)="Registrar()">
               <ion-item>
                 <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
-                <ion-label position="floating">Usuario</ion-label>
-                <ion-input [(ngModel)]="Usuario.username" name="username" type="text" required></ion-input>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input [(ngModel)]="Usuario.nombre" name="nombre" type="text" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+                <ion-label position="floating">Email</ion-label>
+                <ion-input [(ngModel)]="Usuario.email" name="email" type="email" required></ion-input>
               </ion-item>
               <ion-item>
                 <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
                 <ion-label position="floating">Contraseña</ion-label>
                 <ion-input [(ngModel)]="Usuario.password" name="password" type="password" required></ion-input>
               </ion-item>
-              <ion-button expand="full" color="primary" type="submit">Registrar</ion-button>
-              <ion-button expand="full" color="light" (click)="goToLogin()" class="login-button">¿Ya tienes cuenta? Inicia Sesión</ion-button>
+              <ion-button expand="full" color="primary" type="submit" class="register-button">Registrar</ion-button>
             </form>
+            <ion-button expand="full" color="light" (click)="goToLogin()" class="login-button">
+              ¿Ya tienes cuenta? Inicia sesión
+            </ion-button>            
           </ion-card-content>
         </ion-card>
       </ion-col>
