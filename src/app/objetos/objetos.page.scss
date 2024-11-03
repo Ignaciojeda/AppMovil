@@ -1,7 +1,10 @@
 ion-card {
-    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
-    border-radius: 12px;
-    animation: fadeIn 0.6s ease-in-out;
-    position: relative;
-    top: 50px;
-  }
+  margin: 10px;
+  border-radius: 8px;
+}
+
+ion-card img {
+  width: 100%; // Asegúrate de que la imagen ocupe el ancho de la tarjeta
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
