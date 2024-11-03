@@ -1,4 +1,4 @@
-.register-grid{
+.login-grid {
   height: 100%;
   align-items: center;
   justify-content: center;
@@ -9,15 +9,17 @@ ion-card {
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
   animation: fadeIn 0.6s ease-in-out;
+  position: relative;
+  top: 50px;
 }
 
-.register-icon {
+.login-icon {
   font-size: 5rem;
   color: #3880ff;
   animation: pulse 1.5s infinite;
 }
 
-.register-button {
+.login-button {
   margin-top: 20px;
   border-radius: 8px;
 }
@@ -47,4 +49,9 @@ ion-icon {
   100% {
     transform: scale(1);
   }
+}
+
+.identificador{
+  position: relative;
+  top: 5px;
 }

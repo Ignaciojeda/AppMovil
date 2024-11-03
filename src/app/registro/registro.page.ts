@@ -13,7 +13,7 @@ export class RegistroPage {
     nombre: '',
     email: '',
     password: '',
-    tipo_usuario: 'estudiante' // Valor predeterminado para tipo_usuario
+    tipo_usuario: 'estudiante' 
   };
 
   private supabase = createClient('https://rphpxwnpbulwhnhaapeu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwaHB4d25wYnVsd2huaGFhcGV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2MzMzODMsImV4cCI6MjA0NTIwOTM4M30.w8vhc96ABfuEytJS3yt_e4k0WtgG-k-2iG4tiBWLbEc');
@@ -22,14 +22,12 @@ export class RegistroPage {
 
   async Registrar() {
     try {
-      // Intenta insertar el nuevo usuario en Supabase
       const { data, error } = await this.supabase.from('usuarios').insert([this.Usuario]);
 
       if (error) {
         throw error;
       }
 
-      // Muestra un mensaje de éxito y redirige al login
       const alert = await this.alertController.create({
         header: 'Registrado',
         message: 'Usuario registrado con éxito.',

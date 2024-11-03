@@ -28,9 +28,8 @@ export class LoginPage {
   
       // Almacenar los detalles del usuario en localStorage
       localStorage.setItem('loggedInUser', JSON.stringify(user));
-      localStorage.setItem('isLoggedIn', 'true'); // Indicador de sesión activa
+      localStorage.setItem('isLoggedIn', 'true'); 
   
-      // Navegar a la página de inicio y pasar el nombre como parámetro
       this.navCtrl.navigateForward('/tabs', {
         queryParams: { username: user.nombre } // Cambiamos para enviar el nombre
       });
@@ -44,9 +43,10 @@ export class LoginPage {
       await alert.present();
     }
   }
-  
-
   goToRegister() {
     this.navCtrl.navigateForward('/registro');
+  }
+  goToRecuperar() {
+    this.navCtrl.navigateForward('/recuperar');
   }
 }
