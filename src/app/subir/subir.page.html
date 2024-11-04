@@ -1,56 +1,56 @@
 <ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Subir Objeto</ion-title>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">
+        <ion-icon name="log-out-outline"></ion-icon>
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-grid class="upload-grid">
+<ion-content class="upload-content">
+  <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-md="6" size-lg="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title class="ion-text-center">Detalles del Objeto</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <form (ngSubmit)="onSubmit()">
-              <ion-item>
-                <ion-label position="floating">Nombre del Objeto</ion-label>
-                <ion-input [(ngModel)]="objectName" name="objectName" required></ion-input>
-              </ion-item>
+      <ion-col size="12" size-md="6" size-lg="4" class="upload-container">
+        <h1 class="welcome-title">Detalles del Objeto</h1>
+        <h2 class="subtitle">Rellene los campos</h2>
+        <ion-icon name="image-outline" class="upload-icon"></ion-icon>
+        <form (ngSubmit)="onSubmit()" class="upload-form">
+          <ion-item class="input-item">
+            <ion-label position="floating">Nombre del Objeto</ion-label>
+            <ion-input [(ngModel)]="objectName" name="objectName" required></ion-input>
+          </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">Sala Encontrada</ion-label>
-                <ion-input [(ngModel)]="room" name="room" required></ion-input>
-              </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Sala Encontrada</ion-label>
+            <ion-input [(ngModel)]="room" name="room" required></ion-input>
+          </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">Hora Encontrada</ion-label>
-                <ion-input [(ngModel)]="time" name="time" type="time" required></ion-input>
-              </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Hora Encontrada</ion-label>
+            <ion-input [(ngModel)]="time" name="time" type="time" required></ion-input>
+          </ion-item>
 
-              <ion-item>
-                <ion-label position="floating">Descripción</ion-label>
-                <ion-textarea [(ngModel)]="description" name="description" required></ion-textarea>
-              </ion-item>
+          <ion-item class="input-item">
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-textarea [(ngModel)]="description" name="description" required></ion-textarea>
+          </ion-item>
 
-              <ion-item>
-                <ion-label>Foto del Objeto</ion-label>
-                <input type="file" (change)="onImageChange($event)" accept="image/*" />
-              </ion-item>
+          <ion-item>
+            <ion-label>Foto</ion-label>
+            <input type="file" (change)="onImageChange($event)" accept="image/*" />
+          </ion-item>
 
-              <ion-button expand="full" color="primary" type="button" (click)="takePicture()">Tomar Foto</ion-button>
+          <ion-button expand="full" color="primary" type="button" (click)="takePicture()">Tomar Foto</ion-button>
 
-              <!-- Vista previa de la imagen -->
-              <div *ngIf="previewImage">
-                <h5>Vista previa de la imagen:</h5>
-                <img [src]="previewImage" alt="Vista previa de la imagen" style="max-width: 100%; height: auto;">
-              </div>
+          <div *ngIf="previewImage">
+            <h5>Vista previa de la imagen:</h5>
+            <img [src]="previewImage" alt="Vista previa de la imagen" style="max-width: 100%; height: auto;">
+          </div>
 
-              <ion-button expand="full" color="success" type="submit">Subir Objeto</ion-button>
-            </form>
-          </ion-card-content>
-        </ion-card>
+          <ion-button expand="full" color="success upload-button" type="submit">Subir Objeto</ion-button>
+        </form>
       </ion-col>
     </ion-row>
   </ion-grid>

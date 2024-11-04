@@ -1,43 +1,31 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Registro</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-grid class="registro-grid">
+<ion-content class="registro-content">
+  <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-md="6" size-lg="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title class="ion-text-center">
-              <ion-icon name="person-circle-outline" style="font-size: 5rem; color: #3880ff;"></ion-icon>
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <form (ngSubmit)="Registrar()">
-              <ion-item>
-                <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
-                <ion-label position="floating">Nombre</ion-label>
-                <ion-input [(ngModel)]="Usuario.nombre" name="nombre" type="text" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-                <ion-label position="floating">Email</ion-label>
-                <ion-input [(ngModel)]="Usuario.email" name="email" type="email" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
-                <ion-label position="floating">Contraseña</ion-label>
-                <ion-input [(ngModel)]="Usuario.password" name="password" type="password" required></ion-input>
-              </ion-item>
-              <ion-button expand="full" color="primary" type="submit" class="register-button">Registrar</ion-button>
-            </form>
-            <ion-button expand="full" color="light" (click)="goToLogin()" class="login-button">
-              ¿Ya tienes cuenta? Inicia sesión
-            </ion-button>            
-          </ion-card-content>
-        </ion-card>
+      <ion-col size="12" size-md="6" size-lg="4" class="registro-container">
+        <h1 class="welcome-title">Registro</h1>
+        <h2 class="subtitle">Creacion de cuenta</h2>
+        <ion-icon name="person-circle-outline" class="registro-icon"></ion-icon>
+        <form (ngSubmit)="Registrar()" class="registro-form">
+          <ion-item class="input-item">
+            <ion-icon name="person-outline" slot="start" color="primary"></ion-icon>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input [(ngModel)]="Usuario.nombre" name="nombre" type="text" required></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+            <ion-label position="floating">Email</ion-label>
+            <ion-input [(ngModel)]="Usuario.email" name="email" type="email" required></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input [(ngModel)]="Usuario.password" name="password" type="password" required></ion-input>
+          </ion-item>
+          <ion-button expand="full" color="primary" type="submit" class="register-button">Registrar</ion-button>
+        </form>
+        <ion-button expand="full" color="light" (click)="goToLogin()" class="login-button">
+          ¿Ya tienes cuenta? Inicia sesión
+        </ion-button> 
       </ion-col>
     </ion-row>
   </ion-grid>

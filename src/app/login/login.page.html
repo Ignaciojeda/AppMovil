@@ -1,41 +1,29 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Login</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-grid class="login-grid">
+<ion-content class="login-content">
+  <ion-grid>
     <ion-row class="ion-justify-content-center">
-      <ion-col size="12" size-md="6" size-lg="4">
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title class="ion-text-center">
-              <ion-icon name="person-circle-outline" style="font-size: 5rem; color: #3880ff;"></ion-icon>
-            </ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <form (ngSubmit)="Ingresar()">
-              <ion-item>
-                <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
-                <ion-label position="floating">Correo electrónico</ion-label>
-                <ion-input class="identificador" [(ngModel)]="Usuario.email" name="email" type="email" required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
-                <ion-label position="floating">Contraseña</ion-label>
-                <ion-input class="identificador" [(ngModel)]="Usuario.password" name="password" type="password" required></ion-input>
-              </ion-item>
-              <ion-button expand="full" color="primary" type="submit" class="login-button">Iniciar Sesión</ion-button>
-            </form>
-            <ion-button expand="full" color="light" (click)="goToRegister()" class="register-button">
-              ¿No tienes cuenta? Regístrate
-            </ion-button>
-            <ion-button expand="full" color="light" (click)="goToRecuperar()" class="forgot-password-button">
-              ¿Olvidaste tu contraseña?
-            </ion-button>            
-          </ion-card-content>
-        </ion-card>
+      <ion-col size="12" size-md="6" size-lg="4" class="login-container">
+        <h1 class="welcome-title">Bienvenido</h1>
+        <h2 class="subtitle">Inicia sesión para acceder a tu cuenta</h2>
+        <ion-icon name="person-circle-outline" class="login-icon"></ion-icon>
+        <form (ngSubmit)="Ingresar()" class="login-form">
+          <ion-item class="input-item">
+            <ion-icon name="mail-outline" slot="start" color="primary"></ion-icon>
+            <ion-label position="floating">Correo electrónico</ion-label>
+            <ion-input [(ngModel)]="Usuario.email" name="email" type="email" required></ion-input>
+          </ion-item>
+          <ion-item class="input-item">
+            <ion-icon name="lock-closed-outline" slot="start" color="primary"></ion-icon>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input [(ngModel)]="Usuario.password" name="password" type="password" required></ion-input>
+          </ion-item>
+          <ion-button expand="full" color="primary" type="submit" class="login-button">Iniciar Sesión</ion-button>
+        </form>
+        <ion-button expand="full" color="light" (click)="goToRegister()" class="register-button">
+          ¿No tienes cuenta? Regístrate
+        </ion-button>
+        <ion-button expand="full" color="light" (click)="goToRecuperar()" class="forgot-password-button">
+          ¿Olvidaste tu contraseña?
+        </ion-button> 
       </ion-col>
     </ion-row>
   </ion-grid>

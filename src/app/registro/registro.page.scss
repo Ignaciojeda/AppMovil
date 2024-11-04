@@ -1,31 +1,66 @@
-.login-grid {
-  height: 100%;
-  align-items: center;
+.registro-content {
+  --background: #1b1b1b; /* Color de fondo */
+  color: #ffffff;
+  display: flex;
   justify-content: center;
-  background: linear-gradient(135deg, #3b82f6 0%, #edb40a 100%);
+  align-items: center;
+  height: 100%; /* Asegúrate de que el contenido ocupe toda la altura */
 }
 
-ion-card {
-  box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.2);
+.registro-container {
+  text-align: center;
+  padding: 20px;
   border-radius: 12px;
   animation: fadeIn 0.6s ease-in-out;
-  position: relative;
-  top: 50px;
 }
 
-.login-icon {
+.welcome-title {
+  font-size: 2rem;
+  color: #ffffff;
+  margin-top: 20px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: #a0a0a0;
+  margin-bottom: 20px;
+}
+
+.registro-icon {
   font-size: 5rem;
   color: #3880ff;
+  margin-bottom: 20px;
   animation: pulse 1.5s infinite;
 }
 
-.login-button {
-  margin-top: 20px;
-  border-radius: 8px;
+.registro-form {
+  margin-bottom: 20px;
 }
 
-ion-icon {
-  animation: bounce 2s infinite;
+.input-item {
+  --background: #575757; /* Color de fondo para los inputs */
+  margin-bottom: 15px;
+  border-radius: 27px; /* Bordes redondeados */
+}
+
+.input-item ion-input {
+  color: #ffffff; /* Color del texto */
+  border-radius: 20px; /* Asegúrate que los inputs también tengan bordes redondeados */
+}
+
+.input-item ion-label {
+  color: #ffffff; /* Color de las etiquetas */
+}
+
+.input-item ion-icon{
+  position: relative;
+  top: 15px;
+}
+
+.register-button, .login-button {
+  margin-top: 10px;
+  border-radius: 20px;
+  font-weight: bold;
 }
 
 @keyframes fadeIn {
@@ -49,9 +84,4 @@ ion-icon {
   100% {
     transform: scale(1);
   }
-}
-
-.identificador{
-  position: relative;
-  top: 5px;
 }
