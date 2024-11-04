@@ -49,7 +49,9 @@
 }
 
 .input-item ion-label {
-  color: #ffffff; /* Color de las etiquetas */
+  color: #ffffff;
+  position: relative;
+  top: 5px;
 }
 
 .input-item ion-icon{
