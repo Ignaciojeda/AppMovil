@@ -80,7 +80,7 @@ export class SubirPage {
       }
 
       alert('Objeto subido correctamente');
-      this.navCtrl.navigateBack('/home');
+      this.navCtrl.navigateBack('/');
     } catch (error) {
       console.error('Error inesperado:', error);
       alert('No se pudo subir la imagen');
