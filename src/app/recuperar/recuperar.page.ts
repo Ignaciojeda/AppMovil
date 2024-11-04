@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
 import { supabase } from 'supabase.service';
 
+
 @Component({
   selector: 'app-recuperar',
   templateUrl: './recuperar.page.html',
@@ -36,5 +37,8 @@ export class RecuperarPage {
       await alert.present();
       this.navCtrl.navigateBack('/login'); // Regresar a la página de login
     }
+  }
+  goToLogin() {
+    this.navCtrl.navigateRoot('/login');
   }
 }

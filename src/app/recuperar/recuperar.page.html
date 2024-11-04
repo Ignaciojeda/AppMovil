@@ -23,6 +23,9 @@
             <ion-input [(ngModel)]="nuevaContrasena" name="nuevaContrasena" type="password" required></ion-input>
           </ion-item>
           <ion-button expand="full" color="primary" type="submit" class="reset-button">Restablecer Contraseña</ion-button>
+          <ion-button expand="full" color="light" (click)="goToLogin()" class="login-button">
+           Ir a Inicia sesión
+          </ion-button> 
         </form>
       </ion-col>
     </ion-row>
