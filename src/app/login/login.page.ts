@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { supabase } from 'supabase.service' 
+import { supabase } from 'supabase.service';
+import { sha256 } from 'js-sha256'; 
 
 @Component({
   selector: 'app-login',
@@ -9,29 +10,32 @@ import { supabase } from 'supabase.service'
 })
 export class LoginPage {
   Usuario = {
-    email: '',
+    correo: '',
     password: ''
   };
 
   constructor(private navCtrl: NavController, private alertController: AlertController) {}
 
   async Ingresar() {
-    // Consultar la base de datos para verificar si el usuario existe
+
+    const hashedPassword = sha256(this.Usuario.password);
+
     const { data: users, error } = await supabase
       .from('usuarios')
       .select('*')
-      .eq('email', this.Usuario.email)
-      .eq('password', this.Usuario.password);
-  
+      .eq('correo', this.Usuario.correo)
+      .eq('contraseña', hashedPassword);  
+
     if (users && users.length > 0) {
       const user = users[0];
-  
-      // Almacenar los detalles del usuario en localStorage
+
+      console.log('Usuario encontrado: ', user);
+
       localStorage.setItem('loggedInUser', JSON.stringify(user));
-      localStorage.setItem('isLoggedIn', 'true'); 
-  
+      localStorage.setItem('isLoggedIn', 'true');
+
       this.navCtrl.navigateForward('/tabs', {
-        queryParams: { username: user.nombre } // Cambiamos para enviar el nombre
+        queryParams: { username: user.nombre_completo }  
       });
     } else {
       const alert = await this.alertController.create({
@@ -39,13 +43,15 @@ export class LoginPage {
         message: 'Usuario o contraseña incorrectos. Por favor, verifica tus datos.',
         buttons: ['OK']
       });
-  
+
       await alert.present();
     }
   }
+
   goToRegister() {
     this.navCtrl.navigateForward('/registro');
   }
+
   goToRecuperar() {
     this.navCtrl.navigateForward('/recuperar');
   }

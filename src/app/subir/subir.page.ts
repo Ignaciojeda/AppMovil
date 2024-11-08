@@ -27,7 +27,7 @@ export class SubirPage {
   async onSubmit() {
     const userId = JSON.parse(localStorage.getItem('loggedInUser') || '{}').id;
 
-    // Validación de datos
+
     if (!this.objectName || !this.room || !this.time || !this.description || !this.previewImage) {
       alert('Por favor completa todos los campos antes de enviar.');
       return;
@@ -37,7 +37,7 @@ export class SubirPage {
       const fileName = `images/${Date.now()}.png`;
       const imageBlob = await this.urlToBlob(this.previewImage as string);
 
-      // Subida de imagen al bucket
+
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('imagenes')
         .upload(fileName, imageBlob);
@@ -48,7 +48,7 @@ export class SubirPage {
         return;
       }
 
-      // Obtén la URL pública
+
       const { data: urlData } = supabase.storage.from('imagenes').getPublicUrl(fileName);
       const publicUrl = urlData?.publicUrl;
 
@@ -57,11 +57,10 @@ export class SubirPage {
         alert('No se pudo obtener la URL pública de la imagen');
         return;
       }
-      // Formato de fecha y hora
+
       const now = new Date();
       const formattedTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${this.time}:00`;
 
-      // Inserta los datos en la tabla
       const { error: insertError } = await supabase
         .from('objetos_perdidos')
         .insert([{

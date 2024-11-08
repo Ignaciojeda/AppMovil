@@ -16,8 +16,8 @@ export class HomePage implements OnInit {
   ngOnInit() {
     const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
   
-    if (loggedInUser && loggedInUser.nombre) {
-      this.username = loggedInUser.nombre;  // Usar el nombre del usuario almacenado
+    if (loggedInUser && loggedInUser.nombre_completo) {
+      this.username = loggedInUser.nombre_completo;  // Usar el nombre del usuario almacenado
     } else {
       this.route.queryParams.subscribe(params => {
         if (params['username']) {
