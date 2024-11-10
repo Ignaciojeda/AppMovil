@@ -25,8 +25,13 @@ export class SubirPage {
   }
 
   async onSubmit() {
-    const userId = JSON.parse(localStorage.getItem('loggedInUser') || '{}').id;
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser') || '{}');
+    const userRut = loggedInUser.rut;
 
+    if (!userRut) {
+      alert('No se pudo obtener el rut del usuario. Intenta iniciar sesión nuevamente.');
+      return;
+    }
 
     if (!this.objectName || !this.room || !this.time || !this.description || !this.previewImage) {
       alert('Por favor completa todos los campos antes de enviar.');
@@ -37,7 +42,6 @@ export class SubirPage {
       const fileName = `images/${Date.now()}.png`;
       const imageBlob = await this.urlToBlob(this.previewImage as string);
 
-
       const { data: uploadData, error: uploadError } = await supabase.storage
         .from('imagenes')
         .upload(fileName, imageBlob);
@@ -47,7 +51,6 @@ export class SubirPage {
         alert(`Error al subir la imagen al bucket: ${uploadError.message}`);
         return;
       }
-
 
       const { data: urlData } = supabase.storage.from('imagenes').getPublicUrl(fileName);
       const publicUrl = urlData?.publicUrl;
@@ -69,7 +72,8 @@ export class SubirPage {
           hora_encontrada: formattedTime,
           descripcion: this.description,
           foto: publicUrl,
-          usuario_id: userId,
+          rut_usuario: userRut,  // Incluimos el rut del usuario
+          activo: true           // Aseguramos que activo esté en true
         }]);
 
       if (insertError) {

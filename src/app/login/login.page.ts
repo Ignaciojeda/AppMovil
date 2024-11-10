@@ -31,7 +31,11 @@ export class LoginPage {
 
       console.log('Usuario encontrado: ', user);
 
-      localStorage.setItem('loggedInUser', JSON.stringify(user));
+      localStorage.setItem('loggedInUser', JSON.stringify({
+        rut: user.rut,
+        nombre_completo: user.nombre_completo,
+        correo: user.correo,
+      }));
       localStorage.setItem('isLoggedIn', 'true');
 
       this.navCtrl.navigateForward('/tabs', {
