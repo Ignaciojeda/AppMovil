@@ -8,7 +8,7 @@ import { supabase } from 'supabase.service'; // Asegúrate de importar tu servic
   styleUrls: ['./objetos.page.scss'],
 })
 export class ObjetosPage implements OnInit {
-  objetos: any[] = []; // Arreglo para almacenar los objetos perdidos
+  objetos: any[] = [];
 
   constructor(private navCtrl: NavController) {}
 
@@ -21,13 +21,13 @@ export class ObjetosPage implements OnInit {
     this.navCtrl.navigateRoot('/login');
   }
   async ngOnInit() {
-    await this.cargarObjetos(); // Cargar los objetos al inicializar la página
+    await this.cargarObjetos(); 
   }
 
   async cargarObjetos() {
     const { data, error } = await supabase
       .from('objetos_perdidos')
-      .select('id, nombre_objeto, descripcion, foto'); // Ajusta los campos según tu base de datos
+      .select('id_objeto, nombre_objeto, descripcion, foto'); // Ajusta los campos según tu base de datos
   
     if (error) {
       console.error('Error al cargar objetos:', error);
