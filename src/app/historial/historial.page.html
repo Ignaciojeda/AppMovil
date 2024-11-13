@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Historial de Objetos Perdidos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let item of historial">
+      <ion-label>
+        <h2>ID Historial: {{ item.id_historial }}</h2>
+        <p>ID Objeto: {{ item.id_objeto }}</p>
+        <p>RUT Usuario: {{ item.rut_usuario }}</p>
+        <p>Nombre: {{ item.nombre }}</p>
+        <p>Carrera: {{ item.carrera }}</p>
+        <p>Fecha de Entrega: {{ item.fecha_entrega }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Home Admin</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="logout()">Cerrar sesión</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="welcome-message">
+    <h2>Bienvenido, {{ username }} (Admin)</h2>
+  </div>
+
+  <div id="map" style="height: 300px; width: 100%;"></div> <!-- Mapa Leaflet -->
+
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" (click)="gotoobjetos()">Ver Objetos</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" (click)="gotosubir()">Subir Objeto</ion-button>
+      </ion-col>
+      <ion-col>
+        <ion-button expand="full" (click)="gotosubir()">Subir Objeto</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-list *ngIf="adminObjects && adminObjects.length > 0">
+    <ion-item *ngFor="let obj of adminObjects">
+      <ion-label>
+        <h2>{{ obj.nombre }}</h2>
+        <p>{{ obj.descripcion }}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+

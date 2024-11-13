@@ -40,7 +40,15 @@ const routes: Routes = [
   {
     path: '**',
     loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
+  },  {
+    path: 'home-admin',
+    loadChildren: () => import('./home-admin/home-admin.module').then( m => m.HomeAdminPageModule)
   },
+  {
+    path: 'historial',
+    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
+  },
+
 
 ];
 
