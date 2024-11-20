@@ -13,7 +13,7 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs-admin/home',
+        redirectTo: '/tabs-admin/home-admin',
         pathMatch: 'full',
       },
     ],
