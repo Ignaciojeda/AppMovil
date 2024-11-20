@@ -48,6 +48,10 @@ const routes: Routes = [
     path: 'historial',
     loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
   },
+  {
+    path: 'tabs-admin',
+    loadChildren: () => import('./tabs-admin/tabs-admin.module').then( m => m.TabsAdminPageModule)
+  },
 
 
 ];
