@@ -64,7 +64,8 @@ export class SubirPage {
       const now = new Date();
       const formattedTime = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, '0')}-${String(now.getDate()).padStart(2, '0')} ${this.time}:00`;
 
-      const { error: insertError } = await supabase
+      // Insertar en la tabla objetos_perdidos
+      const { data: objetoData, error: insertError } = await supabase
         .from('objetos_perdidos')
         .insert([{
           nombre_objeto: this.objectName,
@@ -72,9 +73,11 @@ export class SubirPage {
           hora_encontrada: formattedTime,
           descripcion: this.description,
           foto: publicUrl,
-          rut_usuario: userRut,  // Incluimos el rut del usuario
-          activo: true           // Aseguramos que activo esté en true
-        }]);
+          rut_usuario: userRut,
+          activo: true,
+        }])
+        .select('id_objeto') // Seleccionar el id del objeto recién insertado
+        .single();
 
       if (insertError) {
         console.error('Error al insertar datos en la tabla objetos_perdidos:', insertError);
@@ -82,11 +85,28 @@ export class SubirPage {
         return;
       }
 
-      alert('Objeto subido correctamente');
+      // Insertar en la tabla Historial
+      const { error: historialError } = await supabase
+        .from('Historial')
+        .insert([{
+          id_objeto: objetoData.id_objeto,
+          rut_usuario: userRut,
+          sala_encontrada: this.room,
+          descripcion: this.description,
+          activo: true,
+        }]);
+
+      if (historialError) {
+        console.error('Error al insertar datos en la tabla Historial:', historialError);
+        alert('Error al insertar datos en el historial: ' + historialError.message);
+        return;
+      }
+
+      alert('Objeto subido correctamente y agregado al historial');
       this.navCtrl.navigateBack('/');
     } catch (error) {
       console.error('Error inesperado:', error);
-      alert('No se pudo subir la imagen');
+      alert('No se pudo completar la acción');
     }
   }
 
