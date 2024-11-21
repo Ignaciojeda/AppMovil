@@ -12,6 +12,10 @@ const routes: Routes = [
         loadChildren: () => import('../home-admin/home-admin.module').then(m => m.HomeAdminPageModule),
       },
       {
+        path: 'historial',
+        loadChildren: () => import('../historial/historial.module').then(m => m.HistorialPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs-admin/home-admin',
         pathMatch: 'full',

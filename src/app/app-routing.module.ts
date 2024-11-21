@@ -43,15 +43,18 @@ const routes: Routes = [
   },
   {
     path: 'home-admin',
-    loadChildren: () => import('./home-admin/home-admin.module').then( m => m.HomeAdminPageModule)
+    loadChildren: () => import('./home-admin/home-admin.module').then( m => m.HomeAdminPageModule),
+    canActivate: [Ingresado]
   },
   {
     path: 'historial',
-    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
+    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule),
+    canActivate: [Ingresado]
   },
   {
     path: 'tabs-admin',
-    loadChildren: () => import('./tabs-admin/tabs-admin.module').then( m => m.TabsAdminPageModule)
+    loadChildren: () => import('./tabs-admin/tabs-admin.module').then( m => m.TabsAdminPageModule),
+    canActivate: [Ingresado]
   },
 
 
