@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { supabase } from 'supabase.service'; // Ajusta la ruta según la ubicación de tu archivo
 
 @Component({
@@ -14,6 +15,8 @@ export class HistorialPage implements OnInit {
   ngOnInit() {
     this.loadHistorial();
   }
+ 
+  
 
   async loadHistorial() {
     const { data, error } = await supabase
@@ -25,5 +28,7 @@ export class HistorialPage implements OnInit {
     } else {
       this.historial = data || []; // Asignamos los datos obtenidos a la propiedad historial
     }
+    
   }
+  
 }
