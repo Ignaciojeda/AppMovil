@@ -54,10 +54,12 @@ export class AdminhPage implements OnInit {
       this.adminObjects = data || [];
     }
   }
+  goToHistorial() {
+    this.navCtrl.navigateForward('/historial');
+  }
 
-  
-  gotoobjetos() {
-    this.navCtrl.navigateForward('/objetos');
+  gotoobjetosa() {
+    this.navCtrl.navigateForward('/admino');
   }
 
 

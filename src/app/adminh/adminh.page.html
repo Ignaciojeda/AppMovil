@@ -19,25 +19,17 @@
 
   </ion-grid>
 
-  <ion-card class="map-card">
-    <ion-card-header>
-      <ion-card-title class="welcome-title ion-text-center">Sede DuocUC</ion-card-title>
-    </ion-card-header>
-    <ion-card-content>
-      <div id="map-container">
-        <div id="map"></div>
-      </div>
-    </ion-card-content>
-  </ion-card>
-
   <ion-grid>
     <ion-row>
       <ion-col>
-        <ion-button expand="full" (click)="gotoobjetos()">Ver Objetos</ion-button>
+        <ion-button expand="full" (click)="gotoobjetosa()">Ver Objetos</ion-button>
       </ion-col>
       <ion-col>
         <ion-button expand="full" (click)="gotosubir()">Subir Objeto</ion-button>
       </ion-col>
+      <ion-col>
+      <ion-button expand="full" (click)="goToHistorial()"> Ver Historial de Objetos Perdidos</ion-button>
+    </ion-col>
     </ion-row>
   </ion-grid>
 

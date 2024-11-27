@@ -51,7 +51,11 @@ const routes: Routes = [
     path: 'admintabs',
     loadChildren: () => import('./admintabs/admintabs.module').then( m => m.AdmintabsPageModule),
     canActivate: [Ingresado]
+  },  {
+    path: 'admino',
+    loadChildren: () => import('./admino/admino.module').then( m => m.AdminoPageModule)
   },
+
 
 
 

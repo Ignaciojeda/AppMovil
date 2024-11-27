@@ -22,9 +22,9 @@
               <ion-card-content>
                 <p>ID Objeto: {{ item.id_objeto }}</p>
                 <p>RUT Usuario: {{ item.rut_usuario }}</p>
-                <p>Nombre: {{ item.nombre }}</p>
-                <p>Carrera: {{ item.carrera }}</p>
-                <p>Fecha de Entrega: {{ item.fecha_entrega }}</p>
+                <p>RUT Entregado a: {{ item.entregado_a }}</p>
+                <p>Nombre: {{ item.usuario?.nombre_completo }}</p>
+                <p>Carrera: {{ item.usuario?.carrera_descripcion }}</p>
               </ion-card-content>
             </ion-card>
           </ion-item>
