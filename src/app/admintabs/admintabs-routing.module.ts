@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabsAdminPage } from './tabs-admin.page';
+import { AdmintabsPage } from './admintabs.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: TabsAdminPage,
+    component: AdmintabsPage,
     children: [
       {
         path: 'historial',
@@ -17,14 +17,14 @@ const routes: Routes = [
       },
       {
         path: '',
-        redirectTo: '/tabs-admin/home-admin',
+        redirectTo: '/admintabs/adminh',
         pathMatch: 'full',
       },
     ],
   },
   {
     path: '',
-    redirectTo: '/tabs-admin/home',
+    redirectTo: '/admintabs/adminh',
     pathMatch: 'full',
   },
 ];
@@ -33,4 +33,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class TabsAdminPageRoutingModule {}
+export class AdmintabsPageRoutingModule{}

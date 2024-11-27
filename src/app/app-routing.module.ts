@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import { Ingresado } from './guards/ingresado.guard'; // Importa el guard para usuarios logueados
-import { NoIngresado } from './guards/noingresado.guard'; // Importa el nuevo guard para usuarios no logueados
+import { NoIngresado } from './guards/noingresado.guard';
+import { Ingresado } from './guards/ingresado.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { 
     path: 'login', 
-    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule), 
-    canActivate: [NoIngresado] // Aplica el guard NoIngresado
+    loadChildren: () => import('./login/login.module').then(m => m.LoginPageModule),
+    canActivate: [NoIngresado]
   },
   { 
     path: 'home', 
@@ -20,42 +20,40 @@ const routes: Routes = [
   },
   {
     path: 'objetos',
-    loadChildren: () => import('./objetos/objetos.module').then(m => m.ObjetosPageModule),
-    canActivate: [Ingresado] // Aplica el guard Ingresado
+    loadChildren: () => import('./objetos/objetos.module').then(m => m.ObjetosPageModule)
   },
   {
     path: 'subir',
-    loadChildren: () => import('./subir/subir.module').then(m => m.SubirPageModule),
-    canActivate: [Ingresado] // Aplica el guard Ingresado
+    loadChildren: () => import('./subir/subir.module').then(m => m.SubirPageModule)
   },
   {
     path: 'tabs',
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule),
-    canActivate: [Ingresado] // Aplica el guard Ingresado
+    canActivate: [Ingresado]
   },
   {
     path: 'recuperar',
     loadChildren: () => import('./recuperar/recuperar.module').then(m => m.RecuperarPageModule)
   },
   {
-    path: '**',
+    path: 'error',
     loadChildren: () => import('./error/error.module').then(m => m.ErrorPageModule)
   },
   {
-    path: 'home-admin',
-    loadChildren: () => import('./home-admin/home-admin.module').then( m => m.HomeAdminPageModule),
-    canActivate: [Ingresado]
-  },
-  {
     path: 'historial',
-    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule),
-    canActivate: [Ingresado]
+    loadChildren: () => import('./historial/historial.module').then( m => m.HistorialPageModule)
   },
   {
-    path: 'tabs-admin',
-    loadChildren: () => import('./tabs-admin/tabs-admin.module').then( m => m.TabsAdminPageModule),
+    path: 'adminh',
+    loadChildren: () => import('./adminh/adminh.module').then( m => m.AdminhPageModule)
+  },
+  {
+    path: 'admintabs',
+    loadChildren: () => import('./admintabs/admintabs.module').then( m => m.AdmintabsPageModule),
     canActivate: [Ingresado]
   },
+
+
 
 
 ];

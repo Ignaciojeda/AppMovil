@@ -1,21 +1,35 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Historial de Objetos Perdidos</ion-title>
-
+    <ion-title class="historial-title">Historial de Objetos Perdidos</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of historial">
-      <ion-label>
-        <h2>ID Historial: {{ item.id_historial }}</h2>
-        <p>ID Objeto: {{ item.id_objeto }}</p>
-        <p>RUT Usuario: {{ item.rut_usuario }}</p>
-        <p>Nombre: {{ item.nombre }}</p>
-        <p>Carrera: {{ item.carrera }}</p>
-        <p>Fecha de Entrega: {{ item.fecha_entrega }}</p>
-      </ion-label>
-    </ion-item>
-  </ion-list>
+<ion-content class="historial-content">
+  <ion-grid class="historial-grid">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="12" size-md="8" size-lg="6" class="historial-col">
+        <h1 class="historial-title ion-text-center">Historial de Objetos</h1>
+        <p class="historial-description">
+          Este es el registro de los objetos perdidos que han sido entregados. Aquí encontrarás información
+          detallada de cada objeto, junto con el usuario que lo reclamó.
+        </p>
+        <ion-list class="historial-list">
+          <ion-item *ngFor="let item of historial" class="historial-item">
+            <ion-card class="historial-card">
+              <ion-card-header>
+                <ion-card-title class="historial-item-title">ID Historial: {{ item.id_historial }}</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <p>ID Objeto: {{ item.id_objeto }}</p>
+                <p>RUT Usuario: {{ item.rut_usuario }}</p>
+                <p>Nombre: {{ item.nombre }}</p>
+                <p>Carrera: {{ item.carrera }}</p>
+                <p>Fecha de Entrega: {{ item.fecha_entrega }}</p>
+              </ion-card-content>
+            </ion-card>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

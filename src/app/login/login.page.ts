@@ -40,7 +40,7 @@ export class LoginPage {
 
       // Redirigir según el tipo de usuario
       if (user.tipo_usuario.id_tipo_usuario === 1) {
-        this.navCtrl.navigateForward('/tabs-admin');
+        this.navCtrl.navigateForward('/admintabs');
       } else {
         this.navCtrl.navigateForward('/tabs');
       }

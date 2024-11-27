@@ -5,11 +5,11 @@ import * as L from 'leaflet';  // Importamos Leaflet para el mapa
 import { supabase } from 'supabase.service';  // Importar el servicio de Supabase
 
 @Component({
-  selector: 'app-home-admin',
-  templateUrl: './home-admin.page.html',
-  styleUrls: ['./home-admin.page.scss'],
+  selector: 'app-adminh',
+  templateUrl: './adminh.page.html',
+  styleUrls: ['./adminh.page.scss'],
 })
-export class HomeAdminPage implements OnInit {
+export class AdminhPage implements OnInit {
   username: string = '';
   map: any;
   adminObjects: any[] = [];  // Lista de objetos perdidos para el administrador

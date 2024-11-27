@@ -20,10 +20,6 @@ const routes: Routes = [
         loadChildren: () => import('../subir/subir.module').then(m => m.SubirPageModule)
       },
       {
-        path: 'historial',
-        loadChildren: () => import('../historial/historial.module').then(m => m.HistorialPageModule)
-      },
-      {
         path: '',
         redirectTo: '/tabs/home',
         pathMatch: 'full'

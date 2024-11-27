@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HomeAdminPage } from './home-admin.page';
+import { AdmintabsPage } from './admintabs.page';
 
-describe('HomeAdminPage', () => {
-  let component: HomeAdminPage;
-  let fixture: ComponentFixture<HomeAdminPage>;
+describe('AdmintabsPage', () => {
+  let component: AdmintabsPage;
+  let fixture: ComponentFixture<AdmintabsPage>;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HomeAdminPage);
+    fixture = TestBed.createComponent(AdmintabsPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
