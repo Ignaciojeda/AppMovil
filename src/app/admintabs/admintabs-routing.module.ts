@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../adminh/adminh.module').then(m => m.AdminhPageModule)
       },
       {
+        path: 'subir',
+        loadChildren: () => import('../subir/subir.module').then(m => m.SubirPageModule)
+      },
+      {
         path: '',
         redirectTo: '/admintabs/adminh',
         pathMatch: 'full',

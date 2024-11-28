@@ -87,7 +87,7 @@ export class SubirPage {
 
       // Insertar en la tabla Historial
       const { error: historialError } = await supabase
-        .from('Historial')
+        .from('historial')
         .insert([{
           id_objeto: objetoData.id_objeto,
           rut_usuario: userRut,

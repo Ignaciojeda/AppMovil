@@ -21,11 +21,11 @@ export class NoIngresado implements CanActivate {
 
       // Si el tipo de usuario es Admin (id_tipo_usuario 1)
       if (idTipoUsuario === 1) {
-        return this.router.createUrlTree(['admintabs']); // Redirige a la página de Admin
+        return this.router.createUrlTree(['/admintabs']); // Redirige a la página de Admin
       } 
       // Si el tipo de usuario es Usuario (id_tipo_usuario 2)
       else if (idTipoUsuario === 2) {
-        return this.router.createUrlTree(['tabs']); // Redirige a la página de Usuario
+        return this.router.createUrlTree(['/tabs']); // Redirige a la página de Usuario
       }
     }
 

@@ -23,24 +23,9 @@ export class AdminhPage implements OnInit {
       this.username = loggedInUser.nombre_completo;  // Usar el nombre del usuario almacenado
     }
 
-    this.loadMap();
     this.loadAdminObjects();  // Cargar objetos perdidos
   }
 
-  // Inicializa el mapa
-  loadMap() {
-    this.map = L.map('map').setView([-41.47010673020358, -72.92584076092523], 13);
-
-    // Capa de OpenStreetMap
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '© OpenStreetMap contributors'
-    }).addTo(this.map);
-
-    // Agregar un marcador
-    L.marker([-41.47010673020358, -72.92584076092523]).addTo(this.map)
-      .bindPopup('Duoc UC, Sede Puerto Montt')
-      .openPopup();
-  }
 
   // Cargar objetos perdidos para el administrador
   async loadAdminObjects() {

@@ -33,15 +33,6 @@
     </ion-row>
   </ion-grid>
 
-  <ion-grid class="adminh-grid">
-    <ion-list *ngIf="adminObjects && adminObjects.length > 0">
-      <ion-item *ngFor="let obj of adminObjects">
-        <ion-label>
-          <h2>{{ obj.nombre }}</h2>
-          <p>{{ obj.descripcion }}</p>
-        </ion-label>
-      </ion-item>
-    </ion-list>
-  </ion-grid>
+  
 
 </ion-content>

@@ -19,7 +19,6 @@ export class Ingresado implements CanActivate {
     if (isLoggedIn) {
       return true; // Permite el acceso
     } else {
-      // Si no está logueado, redirige a la página de login
       return this.router.createUrlTree(['/login']);
     }
   }

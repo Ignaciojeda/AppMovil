@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, AlertController } from '@ionic/angular';
-import { supabase } from 'supabase.service'; // Asegúrate de importar tu servicio de Supabase
+import { supabase } from 'supabase.service';
 
 @Component({
   selector: 'app-admino',
@@ -21,7 +21,7 @@ export class AdminoPage implements OnInit {
   async cargarObjetos() {
     const { data, error } = await supabase
       .from('objetos_perdidos')
-      .select('id_objeto, nombre_objeto, descripcion, foto, activo')
+      .select('id_objeto, nombre_objeto,sala_encontrada,hora_encontrada, descripcion, foto, activo')
       .eq('activo', true);
 
     if (error) {
@@ -33,12 +33,11 @@ export class AdminoPage implements OnInit {
 
   async cargarHistorial() {
     const { data, error } = await supabase
-      .from('Historial')
+      .from('historial')
       .select(`
         id_objeto,
         entregado_a,
-        fecha_entrega,
-        usuarios:entregado_a (nombre, carrera)
+        usuarios:entregado_a (nombre_completo, carrera)
       `);
 
     if (error) {
@@ -53,7 +52,15 @@ export class AdminoPage implements OnInit {
     this.navCtrl.navigateRoot('/login');
   }
 
-  async entregarObjeto(id_objeto: number) {
+  async entregarObjeto(objeto: any) {
+    const id_objeto = objeto.id_objeto; // Extraer el ID numérico del objeto
+    console.log('ID del objeto recibido:', id_objeto);
+  
+    if (!id_objeto || typeof id_objeto !== 'number') {
+      console.error('El ID del objeto no es válido:', id_objeto);
+      return;
+    }
+  
     const alert = await this.alertCtrl.create({
       header: 'Entregar Objeto',
       inputs: [
@@ -69,7 +76,6 @@ export class AdminoPage implements OnInit {
           role: 'cancel',
           handler: () => {
             console.log('Entrega cancelada');
-            return true;
           },
         },
         {
@@ -80,10 +86,10 @@ export class AdminoPage implements OnInit {
               return false;
             }
   
-            // 1. Buscar los datos del usuario por su RUT
+            // Validar si el RUT pertenece a un usuario
             const { data: usuario, error: usuarioError } = await supabase
               .from('usuarios')
-              .select('nombre, carrera')
+              .select('nombre_completo, carrera')
               .eq('rut', data.rut)
               .single();
   
@@ -92,24 +98,21 @@ export class AdminoPage implements OnInit {
               return false;
             }
   
-            // 2. Insertar en el historial
+            // Actualizar en la tabla `historial`
             const { error: historialError } = await supabase
-              .from('Historial')
-              .insert({
-                id_objeto,
-                rut_usuario: data.rut, // RUT de la persona a la que se entrega
-                entregado_a: data.rut, // Redundante si quieres usarlo
-                sala_encontrada: this.objetos.find((objeto) => objeto.id_objeto === id_objeto)?.sala_encontrada,
-                descripcion: this.objetos.find((objeto) => objeto.id_objeto === id_objeto)?.descripcion,
-                activo: false, // Marcar como no activo
-              });
+              .from('historial')
+              .update({
+                entregado_a: data.rut,
+                activo: false,
+              })
+              .eq('id_objeto', id_objeto);
   
             if (historialError) {
-              console.error('Error al insertar en el historial:', historialError);
+              console.error('Error al actualizar el historial:', historialError);
               return false;
             }
   
-            // 3. Actualizar el objeto como no activo
+            // Actualizar el estado del objeto
             const { error: objetoError } = await supabase
               .from('objetos_perdidos')
               .update({ activo: false })
@@ -120,11 +123,11 @@ export class AdminoPage implements OnInit {
               return false;
             }
   
-            // 4. Actualizar listas locales
-            this.objetos = this.objetos.filter((objeto) => objeto.id_objeto !== id_objeto);
+            // Actualizar listas locales
+            this.objetos = this.objetos.filter((obj) => obj.id_objeto !== id_objeto);
             await this.cargarHistorial();
   
-            console.log(`Objeto con id ${id_objeto} entregado y desactivado.`);
+            console.log(`Objeto con ID ${id_objeto} entregado y desactivado.`);
             return true;
           },
         },
@@ -133,4 +136,4 @@ export class AdminoPage implements OnInit {
   
     await alert.present();
   }
-}  
+}   
