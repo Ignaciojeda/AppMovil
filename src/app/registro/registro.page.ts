@@ -9,7 +9,6 @@ interface Carrera {
   descripcion: string;
 }
 
-
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -22,9 +21,9 @@ export class RegistroPage {
     carrera: '',
     email: '',
     password: '',
-    tipo_usuario: 2  // Usuario por defecto
+    tipo_usuario: 2  
   };
-  carreras: Carrera[] = []; // Tipar el array carreras con la interfaz Carrera
+  carreras: Carrera[] = []; 
 
   private supabase = createClient('https://rphpxwnpbulwhnhaapeu.supabase.co', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InJwaHB4d25wYnVsd2huaGFhcGV1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Mjk2MzMzODMsImV4cCI6MjA0NTIwOTM4M30.w8vhc96ABfuEytJS3yt_e4k0WtgG-k-2iG4tiBWLbEc');
 
@@ -40,7 +39,7 @@ export class RegistroPage {
       if (error) {
         throw error;
       }
-      this.carreras = data as Carrera[]; // Convertir data al tipo Carrera[]
+      this.carreras = data as Carrera[];
     } catch (error) {
       console.error('Error al cargar las carreras:', error);
     }
@@ -48,22 +47,36 @@ export class RegistroPage {
 
   async Registrar() {
     try {
-      // Validación del RUT
-      const rutValido = /^[0-9]{7,8}-[0-9Kk]$/.test(this.Usuario.rut);
-      if (!rutValido) {
-        const alert = await this.alertController.create({
-          header: 'Error',
-          message: 'Formato de RUT inválido. Debe ser en formato 12345678-9.',
-          buttons: ['OK']
-        });
-        await alert.present();
+      // Validaciones
+      if (!this.Usuario.rut || !this.Usuario.nombre_completo || !this.Usuario.carrera || !this.Usuario.email || !this.Usuario.password) {
+        await this.mostrarAlerta('Error', 'Todos los campos son obligatorios.');
         return;
       }
 
-   
+      // Validación del RUT
+      const rutValido = /^[0-9]{7,8}-[0-9Kk]$/.test(this.Usuario.rut);
+      if (!rutValido) {
+        await this.mostrarAlerta('Error', 'Formato de RUT inválido. Debe ser en formato 12345678-9.');
+        return;
+      }
+
+      // Validación del correo
+      const correoValido = /^[a-zA-Z0-9._%+-]+@(duocuc|duoc)\.cl$/.test(this.Usuario.email);
+      if (!correoValido) {
+        await this.mostrarAlerta('Error', 'El correo debe pertenecer a los dominios @duocuc.cl o @duoc.cl.');
+        return;
+      }
+
+      // Validación de la contraseña (mínimo 6 caracteres)
+      if (this.Usuario.password.length < 6) {
+        await this.mostrarAlerta('Error', 'La contraseña debe tener al menos 6 caracteres.');
+        return;
+      }
+
+      // Encriptar la contraseña
       const hashedPassword = sha256(this.Usuario.password);
 
-     
+      // Insertar el usuario en la base de datos
       const { data, error } = await this.supabase
         .from('usuarios')
         .insert([{
@@ -71,7 +84,7 @@ export class RegistroPage {
           nombre_completo: this.Usuario.nombre_completo,
           carrera: this.Usuario.carrera,
           correo: this.Usuario.email,
-          contraseña: hashedPassword,  
+          contraseña: hashedPassword,
           tipo_usuario: this.Usuario.tipo_usuario
         }]);
 
@@ -80,26 +93,26 @@ export class RegistroPage {
         throw error;
       }
 
-      const alert = await this.alertController.create({
-        header: 'Registrado',
-        message: 'Usuario registrado con éxito.',
-        buttons: ['OK']
-      });
-      await alert.present();
+      // Éxito
+      await this.mostrarAlerta('Registrado', 'Usuario registrado con éxito.');
       this.router.navigate(['/login']);
-      
     } catch (error) {
       console.error('Detalle del error:', error);
-      const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Este usuario ya está registrado o hubo un problema con el registro.',
-        buttons: ['OK']
-      });
-      await alert.present();
+      await this.mostrarAlerta('Error', 'Este usuario ya está registrado o hubo un problema con el registro.');
     }
   }
 
   goToLogin() {
     this.router.navigate(['/login']);
+  }
+
+  // Método reutilizable para mostrar alertas
+  private async mostrarAlerta(header: string, message: string) {
+    const alert = await this.alertController.create({
+      header,
+      message,
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 }
