@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -111,18 +112,25 @@ export class SubirPage {
   }
 
   async takePicture() {
-    const previewImage = await Camera.getPhoto({
-      quality: 90,
-      allowEditing: false,
-      resultType: CameraResultType.Uri,
-      source: CameraSource.Camera,
-    });
+    try {
+      console.log('Intentando tomar una foto...');
+      const previewImage = await Camera.getPhoto({
+        quality: 90,
+        allowEditing: false,
+        resultType: CameraResultType.Uri,
+        source: CameraSource.Camera,
+      });
 
-    if (previewImage.webPath) {
-      this.previewImage = previewImage.webPath;
-    } else {
-      console.error('No se pudo obtener la ruta de la imagen');
-      this.previewImage = null;
+      if (previewImage.webPath) {
+        this.previewImage = previewImage.webPath;
+        console.log('Foto tomada con éxito:', this.previewImage);
+      } else {
+        console.error('No se pudo obtener la ruta de la imagen');
+        this.previewImage = null;
+      }
+    } catch (error) {
+      console.error('Error al tomar la foto:', error);
+      alert('No se pudo tomar la foto. Por favor, revisa los permisos o intenta nuevamente.');
     }
   }
 
