@@ -47,36 +47,54 @@ export class RegistroPage {
 
   async Registrar() {
     try {
-      // Validaciones
+
       if (!this.Usuario.rut || !this.Usuario.nombre_completo || !this.Usuario.carrera || !this.Usuario.email || !this.Usuario.password) {
         await this.mostrarAlerta('Error', 'Todos los campos son obligatorios.');
         return;
       }
-
-      // Validación del RUT
+  
+ 
       const rutValido = /^[0-9]{7,8}-[0-9Kk]$/.test(this.Usuario.rut);
       if (!rutValido) {
         await this.mostrarAlerta('Error', 'Formato de RUT inválido. Debe ser en formato 12345678-9.');
         return;
       }
-
-      // Validación del correo
+  
+      
       const correoValido = /^[a-zA-Z0-9._%+-]+@(duocuc|duoc)\.cl$/.test(this.Usuario.email);
       if (!correoValido) {
         await this.mostrarAlerta('Error', 'El correo debe pertenecer a los dominios @duocuc.cl o @duoc.cl.');
         return;
       }
+  
 
-      // Validación de la contraseña (mínimo 6 caracteres)
       if (this.Usuario.password.length < 6) {
         await this.mostrarAlerta('Error', 'La contraseña debe tener al menos 6 caracteres.');
         return;
       }
-
-      // Encriptar la contraseña
+  
+  
+      const { data: usuarioExistente, error: errorConsulta } = await this.supabase
+        .from('usuarios')
+        .select('rut, correo')
+        .or(`rut.eq.${this.Usuario.rut},correo.eq.${this.Usuario.email}`)
+        .single();
+  
+      if (errorConsulta && errorConsulta.code !== 'PGRST116') { 
+        throw errorConsulta;
+      }
+  
+      if (usuarioExistente) {
+        const mensajeError = usuarioExistente.rut === this.Usuario.rut
+          ? 'El RUT ingresado ya está registrado.'
+          : 'El correo ingresado ya está registrado.';
+        await this.mostrarAlerta('Error', mensajeError);
+        return;
+      }
+  
+   
       const hashedPassword = sha256(this.Usuario.password);
-
-      // Insertar el usuario en la base de datos
+  
       const { data, error } = await this.supabase
         .from('usuarios')
         .insert([{
@@ -87,26 +105,27 @@ export class RegistroPage {
           contraseña: hashedPassword,
           tipo_usuario: this.Usuario.tipo_usuario
         }]);
-
+  
       if (error) {
         console.error('Error al insertar usuario en Supabase:', error.message);
         throw error;
       }
 
-      // Éxito
       await this.mostrarAlerta('Registrado', 'Usuario registrado con éxito.');
       this.router.navigate(['/login']);
     } catch (error) {
       console.error('Detalle del error:', error);
-      await this.mostrarAlerta('Error', 'Este usuario ya está registrado o hubo un problema con el registro.');
+      await this.mostrarAlerta('Error', 'Hubo un problema con el registro. Inténtalo nuevamente.');
     }
   }
+  
+  
 
   goToLogin() {
     this.router.navigate(['/login']);
   }
 
-  // Método reutilizable para mostrar alertas
+
   private async mostrarAlerta(header: string, message: string) {
     const alert = await this.alertController.create({
       header,
