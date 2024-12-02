@@ -54,10 +54,6 @@ export class HomePage implements OnInit {
     this.navCtrl.navigateForward('/objetos');
   }
 
-  goToHistorial() {
-    this.navCtrl.navigateForward('/historial');
-  }
-
   gotosubir() {
     this.navCtrl.navigateForward('/subir');
   }
