@@ -27,7 +27,8 @@ export class ObjetosPage implements OnInit {
   async cargarObjetos() {
     const { data, error } = await supabase
       .from('objetos_perdidos')
-      .select('id_objeto, nombre_objeto, descripcion, foto'); // Ajusta los campos según tu base de datos
+      .select('id_objeto, nombre_objeto, descripcion, foto')
+      .eq('activo', true);
   
     if (error) {
       console.error('Error al cargar objetos:', error);
