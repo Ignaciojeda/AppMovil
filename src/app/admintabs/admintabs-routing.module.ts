@@ -16,8 +16,8 @@ const routes: Routes = [
         loadChildren: () => import('../adminh/adminh.module').then(m => m.AdminhPageModule)
       },
       {
-        path: 'objetos',
-        loadChildren: () => import('../objetos/objetos.module').then(m => m.ObjetosPageModule)
+        path: 'admino',
+        loadChildren: () => import('../admino/admino.module').then(m => m.AdminoPageModule)
       },
       {
         path: 'subir',
