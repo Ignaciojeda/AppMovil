@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Camera, CameraResultType, CameraSource } from '@capacitor/camera';
@@ -134,12 +133,17 @@ export class SubirPage {
     }
   }
 
+  triggerFileInput() {
+    const fileInput = document.getElementById('file-input') as HTMLInputElement;
+    fileInput.click();
+  }
+
   onImageChange(event: any) {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
-      reader.onload = (e: any) => {
-        this.previewImage = e.target.result;
+      reader.onload = () => {
+        this.previewImage = reader.result;
       };
       reader.readAsDataURL(file);
     }

@@ -37,13 +37,14 @@
             <ion-textarea [(ngModel)]="description" name="description" required></ion-textarea>
           </ion-item>
 
-           <ion-item>
-            <ion-label>Foto</ion-label>
-            <input type="file" (change)="onImageChange($event)" accept="image/*" />
-          </ion-item> 
+          <!-- Botón para elegir entre subir archivo o tomar foto -->
+          <ion-button expand="full" color="primary" (click)="takePicture()">Tomar Foto</ion-button>
+          
+          <!-- Input para seleccionar una imagen desde el dispositivo -->
+          <input type="file" accept="image/*" (change)="onImageChange($event)" style="display:none;" id="file-input">
+          <ion-button expand="full" color="secondary" (click)="triggerFileInput()">Seleccionar Imagen</ion-button>
 
-          <ion-button expand="full" color="primary" type="button" (click)="takePicture()">Tomar Foto</ion-button>
-
+          <!-- Vista previa de la imagen seleccionada o tomada -->
           <div *ngIf="previewImage">
             <h5 class="welcome-title">Vista previa de la imagen:</h5>
             <img [src]="previewImage" alt="Vista previa de la imagen" style="max-width: 100%; height: auto;">
