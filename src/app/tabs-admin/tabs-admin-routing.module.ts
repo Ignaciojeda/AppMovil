@@ -16,6 +16,10 @@ const routes: Routes = [
         loadChildren: () => import('../adminh/adminh.module').then(m => m.AdminhPageModule)
       },
       {
+        path: 'admino',
+        loadChildren: () => import('../admino/admino.module').then(m=>m.AdminoPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs-admin/home-admin',
         pathMatch: 'full',
